@@ -19,6 +19,12 @@ const userSlice = createSlice({
     error: null,
   },
   reducers: {
+    login: (state, action) => {
+      state.info = action.payload,
+      state.loading = 'idle';
+      state.currentRequestId = undefined;
+      state.error = null;
+    },
     logout: (state) => {
       state.info = null; // storage (auth.token) or null
       state.loading = 'idle';
@@ -38,5 +44,5 @@ const userSlice = createSlice({
     // },
   },
 });
-export const { logout } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;
