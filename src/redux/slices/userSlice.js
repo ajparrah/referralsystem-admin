@@ -31,6 +31,9 @@ const userSlice = createSlice({
       state.currentRequestId = undefined;
       state.error = null;
     },
+    resetError: (state, action) => {
+      state.error = action.payload;
+    }
   },
   extraReducers: {
     // [startLogin.pending]: (state, action) => {
@@ -44,5 +47,5 @@ const userSlice = createSlice({
     // },
   },
 });
-export const { login, logout } = userSlice.actions;
+export const { login, logout, resetError } = userSlice.actions;
 export default userSlice.reducer;

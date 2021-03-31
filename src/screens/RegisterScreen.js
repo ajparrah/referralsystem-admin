@@ -1,7 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import MainPage from '../sections/auth/MainPage';
+import RegisterMainPage from '../sections/auth/RegisterMainPage';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const classes = useStyles();
   return (
     <>
@@ -18,11 +18,12 @@ const LoginScreen = () => {
         container={true}
         justify="center"
         alignItems="center"
-        className={classes.container}>
-        <MainPage />
+        className={classes.container}
+      >
+        <RegisterMainPage />
       </Grid>
     </>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
