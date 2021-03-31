@@ -20,8 +20,7 @@ import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../schemas/userSchemas';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetError } from '../../redux/slices/userSlice';
-// import { resetError, startLogin } from '../../redux/slices/userSlice';
+import { resetError, startLogin } from '../../redux/slices/userSlice';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Link } from 'react-router-dom';
 
@@ -51,7 +50,7 @@ const FormLogin = () => {
   const handleLogin = (credentials) => {
     // It's already validated
     console.log(credentials);
-    // dispatch(startLogin({ ...credentials }));
+    dispatch(startLogin({ ...credentials }));
   };
 
   return (
