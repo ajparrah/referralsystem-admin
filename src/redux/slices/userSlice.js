@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import { createAsyncThunk } from '@reduxjs/toolkit'; // import above
-// import { loginAPI } from '../../api/user';
+// import { loginAPI } from '../../api/userAPI';
 
 // #region Actions
 // export const startLogin = createAsyncThunk(
 //   'user/startLogin',
 //   async (credentials, { getState, requestId }) => {
 //     //Login on server to get JWT
-// });
+//   }
+// );
 // #endregion Actions
 
 const userSlice = createSlice({
@@ -20,8 +21,7 @@ const userSlice = createSlice({
   },
   reducers: {
     login: (state, action) => {
-      state.info = action.payload,
-      state.loading = 'idle';
+      (state.info = action.payload), (state.loading = 'idle');
       state.currentRequestId = undefined;
       state.error = null;
     },
@@ -33,17 +33,15 @@ const userSlice = createSlice({
     },
     resetError: (state, action) => {
       state.error = action.payload;
-    }
+    },
   },
   extraReducers: {
     // [startLogin.pending]: (state, action) => {
-      
     // },
     // [startLogin.fulfilled]: (state, action) => {
     //   // set session credential on storage (auth.token)
     // },
     // [startLogin.rejected]: (state, action) => {
-      
     // },
   },
 });

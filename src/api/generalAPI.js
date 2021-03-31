@@ -1,4 +1,4 @@
-const API_URL = 'api gateway';
+const API_URL = 'https://reachyetitestback.herokuapp.com';
 const API_HEADER = new Headers();
 API_HEADER.append('Content-Type', 'application/json');
 export const fetchNoToken = (endpoint, data, method = 'GET') => {

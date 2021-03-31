@@ -26,4 +26,26 @@ export const loginAPI = async ({ email, password }) => {
   }
 };
 
-export const registerAPI = async () => {};
+export const signUpAPI = async (user) => {
+  try {
+    const action = 'signup';
+    const userToRegister = {
+      ...user,
+      role: 'ADMIN_ROLE',
+    };
+    const response = await fetchNoToken(
+      `${resource}/${action}`,
+      userToRegister,
+      'POST'
+    );
+    const data = await response.json();
+    if (data.ok) {
+      return data;
+    } else {
+      throw new Error(data.msg);
+    }
+  } catch (error) {
+    console.log('Ha ocurrido un error al tratar el registro', error);
+    throw error;
+  }
+};
