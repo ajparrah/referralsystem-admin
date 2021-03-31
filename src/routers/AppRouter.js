@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import LoginScreen from '../screens/LoginScreen';
 import AdminRouter from './AdminRouter';
+import AuthRouter from './AuthRouter';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
@@ -13,11 +13,9 @@ const AppRouter = () => {
       <Router>
         <div>
           <Switch>
-            <PublicRoute
-              path="/login"
-              userIsLogged={info}
-              component={LoginScreen}
-            />
+            <PublicRoute userIsLogged={info}>
+              <AuthRouter />
+            </PublicRoute>
             <PrivateRoute path="/" userIsLogged={info}>
               <AdminRouter />
             </PrivateRoute>

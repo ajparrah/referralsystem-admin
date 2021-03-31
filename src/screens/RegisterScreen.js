@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import MainPage from '../sections/auth/MainPage';
+import RegisterMainPage from '../sections/auth/RegisterMainPage';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -20,7 +20,7 @@ const RegisterScreen = () => {
         alignItems="center"
         className={classes.container}
       >
-        <MainPage />
+        <RegisterMainPage />
       </Grid>
     </>
   );

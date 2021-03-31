@@ -23,8 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetError } from '../../redux/slices/userSlice';
 // import { resetError, startLogin } from '../../redux/slices/userSlice';
 import MuiAlert from '@material-ui/lab/Alert';
-import { Link as LinkRouter } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   marginBottom: {
@@ -146,12 +145,10 @@ const FormRegister = () => {
           >
             Sign Up
           </Button>
-          <Typography display="flex" align="center">
-            <LinkRouter to="/register">
-              <Link>
+          <Typography align="center">
+            <Link to="/login">
                 Sign In
-              </Link>
-            </LinkRouter>
+            </Link>
           </Typography>
         </Box>
       </form>

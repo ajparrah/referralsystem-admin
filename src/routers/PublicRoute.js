@@ -1,17 +1,13 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router';
+import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 
-const PublicRoute = ({ userIsLogged, component }) =>
-  !userIsLogged ? (
-    <Route path="/login" component={component} />
-  ) : (
-    <Redirect to="/" />
-  );
+const PublicRoute = ({ children, userIsLogged }) =>
+  !userIsLogged ? children : <Redirect to="/" />;
 
 PublicRoute.propTypes = {
+  children: PropTypes.object.isRequired,
   userIsLogged: PropTypes.any,
-  component: PropTypes.func.isRequired,
 };
 
 export default PublicRoute;
