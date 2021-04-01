@@ -14,7 +14,6 @@ export const fetchNoToken = (endpoint, data, method = 'GET') => {
 
 export const fetchToken = (endpoint, JWT, data, method = 'GET') => {
   const url = `${API_URL}${endpoint}`;
-  console.log('JWT', JWT);
   if(method === 'GET') {
     return fetch(url);
   } else {
