@@ -49,16 +49,13 @@ const FormRegister = () => {
     const register = async () => {
       try {
         setIsLoading(true);
-        console.log('Mande a ejecutar la peticion');
         const userRegistered = await signUpAPI({ ...user });
-        setIsLoading();
         if (userRegistered.ok) {
           setUserOk({
             value: true,
             msg: userRegistered.msg,
           });
         }
-        console.log('resultado del register', userRegistered);
       } catch (error) {
         setError('signUpFailed', {
           message: error.message,

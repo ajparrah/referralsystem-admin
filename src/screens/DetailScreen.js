@@ -3,7 +3,8 @@ import React from 'react'
 const DetailScreen = () => {
   return (
     <div>
-      <h1>Detail Screen (Shareable Link)</h1>
+      <h1>This is for NAME</h1>
+      <h1>Button</h1>
     </div>
   )
 }
