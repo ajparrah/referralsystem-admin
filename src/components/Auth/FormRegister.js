@@ -19,11 +19,10 @@ import { useForm } from 'react-hook-form';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../schemas/userSchemas';
-import { useDispatch, useSelector } from 'react-redux';
-import { resetError } from '../../redux/slices/userSlice';
-// import { resetError, startLogin } from '../../redux/slices/userSlice';
 import MuiAlert from '@material-ui/lab/Alert';
 import { Link } from 'react-router-dom';
+import { signUpAPI } from '../../api/userAPI';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   marginBottom: {
@@ -33,25 +32,45 @@ const useStyles = makeStyles({
 
 const FormRegister = () => {
   const classes = useStyles();
-
-  const { error: errorLoginFailed, loading: logging } = useSelector(
-    (state) => state.user
-  );
-
-  const dispatch = useDispatch();
-
+  const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
+  const [userOk, setUserOk] = useState({
+    value: false,
+    msg: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
-
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setError, clearErrors } = useForm({
     resolver: yupResolver(registerSchema),
   });
-
-  const isLoading = logging === 'pending' ? true : false;
-
-  const handleLogin = (credentials) => {
-    // It's already validated
-    console.log(credentials);
-    // dispatch(startLogin({ ...credentials }));
+  console.log('Errores', errors);
+  const handleSignUp = (user) => {
+    // It's already validated by schema (react-hook-form)
+    console.log(user);
+    const register = async () => {
+      try {
+        setIsLoading(true);
+        console.log('Mande a ejecutar la peticion');
+        const userRegistered = await signUpAPI({ ...user });
+        setIsLoading();
+        if (userRegistered.ok) {
+          setUserOk({
+            value: true,
+            msg: userRegistered.msg,
+          });
+        }
+        console.log('resultado del register', userRegistered);
+      } catch (error) {
+        setError('signUpFailed', {
+          message: error.message,
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    register();
+  };
+  const handleGoToLogin = () => {
+    history.replace('/login');
   };
 
   return (
@@ -62,7 +81,7 @@ const FormRegister = () => {
         </Typography>
       </Box>
 
-      <form autoComplete="off" onSubmit={handleSubmit(handleLogin)}>
+      <form autoComplete="off" onSubmit={handleSubmit(handleSignUp)}>
         <Box display="flex" flexDirection="column">
           <TextField
             name="name"
@@ -126,12 +145,24 @@ const FormRegister = () => {
             </FormHelperText>
           </FormControl>
           <Snackbar
-            open={errorLoginFailed !== null}
+            open={
+              errors.signUpFailed?.message &&
+              errors.signUpFailed?.message !== ''
+            }
             autoHideDuration={6000}
-            onClose={() => dispatch(resetError(null))}
+            onClose={() => clearErrors('signUpFailed')}
           >
-            <Alert onClose={() => dispatch(resetError(null))} severity="error">
-              {errorLoginFailed}
+            <Alert onClose={() => clearErrors('signUpFailed')} severity="error">
+              {errors.signUpFailed?.message}
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={userOk.value}
+            autoHideDuration={6000}
+            onClose={handleGoToLogin}
+          >
+            <Alert onClose={handleGoToLogin} severity="success">
+              {userOk.msg}
             </Alert>
           </Snackbar>
           <Button
@@ -146,9 +177,7 @@ const FormRegister = () => {
             Sign Up
           </Button>
           <Typography align="center">
-            <Link to="/login">
-                Sign In
-            </Link>
+            <Link to="/login">Sign In</Link>
           </Typography>
         </Box>
       </form>
