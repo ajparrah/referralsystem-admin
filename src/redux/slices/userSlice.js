@@ -22,7 +22,7 @@ export const startLogin = createAsyncThunk(
 const userSlice = createSlice({
   name: 'user',
   initialState: {
-    info: localStorage.getItem('userLogged') || null,
+    info: JSON.parse(localStorage.getItem('userLogged')) || null,
     loading: 'idle',
     currentRequestId: undefined,
     error: null,
@@ -54,7 +54,7 @@ const userSlice = createSlice({
         state.loading = 'idle';
         state.info = action.payload;
         state.currentRequestId = undefined;
-        localStorage.setItem('userLogged', action.payload);
+        localStorage.setItem('userLogged', JSON.stringify(action.payload));
       }
     },
     [startLogin.rejected]: (state, action) => {
