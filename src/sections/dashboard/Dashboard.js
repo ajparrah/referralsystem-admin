@@ -3,7 +3,7 @@ import { Box, Grid, makeStyles, Typography } from '@material-ui/core';
 import FormCreateLink from '../../components/Dashboard/FormCreateLink';
 
 const useStyles = makeStyles({
-  loginContainer: {
+  container: {
     backgroundColor: '#fffffe',
   },
 });
@@ -18,7 +18,7 @@ const Dashboard = () => {
         sm={8}
         md={5}
         lg={4}
-        className={classes.loginContainer}
+        className={classes.container}
       >
         <Box px={3} py={5}>
           <Box mb={2}>
