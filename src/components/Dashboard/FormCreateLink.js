@@ -33,37 +33,37 @@ const FormCreateLink = () => {
     resolver: yupResolver(createLinkSchema),
   });
 
-  const handleCreateDinamicLink = ({ name }) => {
+  const handleCreateDynamicLink = ({ name }) => {
     // It's already validated
     console.log(name);
-    const createDinamicLink = async () => {
+    const createDynamicLink = async () => {
       try {
         setIsLoading(true);
-        const dinamicLinkCreated = await createLinkAPI(name, token);
-        if (dinamicLinkCreated.ok) {
+        const dynamicLinkCreated = await createLinkAPI(name, token);
+        if (dynamicLinkCreated.ok) {
           history.push(`/${name}`);
         }
       } catch (error) {
         console.log('Ha ocurrido un error al generar el link', error);
-        setError('createDinamicLinkFailed', {
+        setError('createDynamicLinkFailed', {
           message: error.message,
         });
       } finally {
         setIsLoading(false);
       }
     };
-    createDinamicLink();
+    createDynamicLink();
   };
 
   return (
     <>
       <Box mb={3}>
         <Typography color="textPrimary" variant="h4" align="center">
-          Create Dinamic Links
+          Create Dynamic Links
         </Typography>
       </Box>
 
-      <form autoComplete="off" onSubmit={handleSubmit(handleCreateDinamicLink)}>
+      <form autoComplete="off" onSubmit={handleSubmit(handleCreateDynamicLink)}>
         <Box display="flex" flexDirection="column">
           <TextField
             name="name"
@@ -80,17 +80,17 @@ const FormCreateLink = () => {
           />
           <Snackbar
             open={
-              errors.createDinamicLinkFailed?.message &&
-              errors.createDinamicLinkFailed?.message !== ''
+              errors.createDynamicLinkFailed?.message &&
+              errors.createDynamicLinkFailed?.message !== ''
             }
             autoHideDuration={6000}
-            onClose={() => clearErrors('createDinamicLinkFailed')}
+            onClose={() => clearErrors('createDynamicLinkFailed')}
           >
             <Alert
-              onClose={() => clearErrors('createDinamicLinkFailed')}
+              onClose={() => clearErrors('createDynamicLinkFailed')}
               severity="error"
             >
-              {errors.createDinamicLinkFailed?.message}
+              {errors.createDynamicLinkFailed?.message}
             </Alert>
           </Snackbar>
           <Button
