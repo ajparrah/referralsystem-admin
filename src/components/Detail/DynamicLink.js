@@ -1,20 +1,14 @@
 import React from 'react';
-import { Box, Button, makeStyles, Typography } from '@material-ui/core';
+import { Box, makeStyles, Typography } from '@material-ui/core';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import LinkIcon from '@material-ui/icons/Link';
 import PropTypes from 'prop-types';
+import { isAndroid, isIOS } from 'react-device-detect';
+import CallsToAction from './CallsToAction';
 
 const useStyles = makeStyles({
   textWhite: {
     color: '#fffffe',
-  },
-  content: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  buttonShare: {
-    display: 'flex',
-    width: '100%',
   },
 });
 
@@ -23,26 +17,26 @@ const DynamicLink = ({ name, shareableLink }) => {
   const handleCopyShareableLink = () => {
     window.location.href = shareableLink;
   };
+  const handleAndroidDownload = () => {
+    window.location.href = 'https://play.google.com/store/apps/details?id=com.instagram.android&hl=es_419&gl=US';
+  }
+  const handleiOSDownload = () => {
+    window.location.href = 'https://apps.apple.com/es/app/instagram/id389801252';
+  }
   return (
     <>
       <Box mb={2}>
         <Typography variant="h2" align="center" className={classes.textWhite}>
-          This is for {name}
+          This page is for {name}
         </Typography>
       </Box>
-      <Box mb={2}>
-        <Button
-          type="button"
-          variant="contained"
-          color="primary"
-          size="large"
-          className={classes.buttonShare}
-          endIcon={<LinkIcon />}
-          onClick={handleCopyShareableLink}
-        >
-          Share
-        </Button>
-      </Box>
+      {
+        isAndroid
+        ? <CallsToAction message="Download app" handleClick={handleAndroidDownload} icon={<GetAppIcon />} />
+        : isIOS
+        ? <CallsToAction message="Download app" handleClick={handleiOSDownload} icon={<GetAppIcon />}  />
+        : <CallsToAction message="Share" handleClick={handleCopyShareableLink} icon={<LinkIcon />}  />
+      }
     </>
   );
 };
