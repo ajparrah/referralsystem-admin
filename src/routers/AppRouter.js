@@ -1,6 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import DetailScreen from '../screens/DetailScreen';
+import NotFoundScreen from '../screens/NotFoundScreen';
 import AdminRouter from './AdminRouter';
 import AuthRouter from './AuthRouter';
 import PrivateRoute from './PrivateRoute';
@@ -14,6 +16,8 @@ const AppRouter = () => {
       <Router>
         <div>
           <Switch>
+            <Route exact path="/:name" component={DetailScreen} />
+            <Route exact path="/link/404" component={NotFoundScreen} />
             <PublicRoute
               path="/auth"
               isAuthenticated={isLogged}
