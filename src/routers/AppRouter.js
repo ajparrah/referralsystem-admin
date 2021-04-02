@@ -8,15 +8,18 @@ import PublicRoute from './PublicRoute';
 
 const AppRouter = () => {
   const { info } = useSelector((state) => state.user);
+  const isLogged = info ? true : false;
   return (
     <div>
       <Router>
         <div>
           <Switch>
-            <PublicRoute userIsLogged={info}>
-              <AuthRouter />
-            </PublicRoute>
-            <PrivateRoute path="/" userIsLogged={info}>
+            <PublicRoute
+              path="/auth"
+              isAuthenticated={isLogged}
+              component={AuthRouter}
+            />
+            <PrivateRoute userIsLogged={isLogged}>
               <AdminRouter />
             </PrivateRoute>
           </Switch>

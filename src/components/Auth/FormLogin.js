@@ -132,7 +132,7 @@ const FormLogin = () => {
             Sign In
           </Button>
           <Typography align="center">
-            <Link to="/register">
+            <Link to="/auth/register">
                 Sign Up
             </Link>
           </Typography>

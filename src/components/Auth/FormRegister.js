@@ -67,7 +67,7 @@ const FormRegister = () => {
     register();
   };
   const handleGoToLogin = () => {
-    history.replace('/login');
+    history.replace('/auth/login');
   };
 
   return (
@@ -174,7 +174,7 @@ const FormRegister = () => {
             Sign Up
           </Button>
           <Typography align="center">
-            <Link to="/login">Sign In</Link>
+            <Link to="/auth/login">Sign In</Link>
           </Typography>
         </Box>
       </form>

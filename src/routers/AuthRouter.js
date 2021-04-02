@@ -8,9 +8,9 @@ const AuthRouter = () => {
     <>
       <div>
         <Switch>
-          <Route exact path="/login" component={LoginScreen} />
-          <Route exact path="/register" component={RegisterScreen} />
-          <Redirect to="/login" />
+          <Route exact path="/auth/login" component={LoginScreen} />
+          <Route exact path="/auth/register" component={RegisterScreen} />
+          <Redirect to="/auth/login" />
         </Switch>
       </div>
     </>
