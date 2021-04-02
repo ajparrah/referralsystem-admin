@@ -13,7 +13,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 import LinkIcon from '@material-ui/icons/Link';
 import { createLinkSchema } from '../../schemas/pagesSchemas';
 import { createLinkAPI } from '../../api/pageAPI';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
@@ -24,22 +23,18 @@ const useStyles = makeStyles({
 
 const FormCreateLink = () => {
   const classes = useStyles();
-  const {
-    info: { token },
-  } = useSelector((state) => state.user);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { register, handleSubmit, errors, setError, clearErrors } = useForm({
     resolver: yupResolver(createLinkSchema),
   });
-
   const handleCreateDynamicLink = ({ name }) => {
     // It's already validated
     console.log(name);
     const createDynamicLink = async () => {
       try {
         setIsLoading(true);
-        const dynamicLinkCreated = await createLinkAPI(name, token);
+        const dynamicLinkCreated = await createLinkAPI(name);
         if (dynamicLinkCreated.ok) {
           history.push(`/${name}`);
         }

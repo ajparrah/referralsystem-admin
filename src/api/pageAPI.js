@@ -1,10 +1,10 @@
-import { fetchToken, fetchNoToken } from './generalAPI';
+import { fetchNoToken } from './generalAPI';
 
 const resource = '/shareablelinks';
 
-export const createLinkAPI = async (name, JWT) => {
+export const createLinkAPI = async (name) => {
   try {
-    const response = await fetchToken(`${resource}/${name}`, JWT, null, 'POST');
+    const response = await fetchNoToken(`${resource}/${name}`, null, 'POST');
     const data = await response.json();
     if (data.ok) {
       return data;
